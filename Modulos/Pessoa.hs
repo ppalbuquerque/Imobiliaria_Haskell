@@ -1,5 +1,5 @@
 module Modulos.Pessoa (Pessoa (..)) where
 
-data Pessoa = Pessoa { nomePessoa :: string
+data Pessoa = Pessoa { nomePessoa :: String
                      , cpf :: String
-                     , idade :: Int}
+                     , idade :: Int } deriving (Show)

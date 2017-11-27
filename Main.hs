@@ -1,7 +1,6 @@
 import Modulos.BancoDeDados
 import Modulos.Operacoes
 import Modulos.Deposito
-import Modulos.Saque
 import Modulos.ListarContas
 import Modulos.Arvore
 import Modulos.Helpers as Helpers
@@ -18,8 +17,7 @@ main = do
       Modulos.Operacoes.vendaImovel
       main
     3 -> do
-      Modulos.Saque.sacando
-      Modulos.Saque.transfere
+      Modulos.Operacoes.alugarImovel
       main
     4 -> do
       Modulos.Deposito.depositando

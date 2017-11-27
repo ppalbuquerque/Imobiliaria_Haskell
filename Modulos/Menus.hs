@@ -29,3 +29,15 @@ menu_listando = do
     menu_listando
   else
     return pTipo
+
+
+menu_alugar_cliente :: IO Int
+menu_alugar_cliente = do
+  putStrLn "1 - Novo Cliente"
+  putStrLn "2 - Cliente Existente"
+  pTipo <- readLn
+  if pTipo <= 0 || pTipo > 2 then do
+    putStrLn "Opção inválida"
+    menu_listando
+  else
+    return pTipo

@@ -42,14 +42,6 @@ busca_id :: [String] -> String
 busca_id [] = ""
 busca_id (x:xs) = if x == "imovelid:" then head xs else busca_id xs
 
-busca_cpfs :: [String] -> String
-busca_cpfs [] = ""
-busca_cpfs (x:xs) = if x == "cpf:" then head xs else busca_cpfs xs
-
-busca_nomes :: [String] -> String
-busca_nomes [] = ""
-busca_nomes (x:xs) = if x == "nomeBanco:" then head xs else busca_nomes xs
-
 busca_idade :: [String] -> [String]
 busca_idade [] = []
 busca_idade (x:xs) = if x == "idade:" then [head xs] else busca_idade xs

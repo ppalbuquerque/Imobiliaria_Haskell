@@ -51,7 +51,7 @@ dadosImovel = do
   pId <- gerarid
 
   let dado = (Imovel {endereco=pEndereco, preco=pPreco, descricao=pDesc, area=pArea, comodos=pComodos, tipo = pTipos,imovelid = pId})
-  BancoDeDados.salvar dado
+  BancoDeDados.salvar_imovel dado
 
 
 saveListToFile :: String -> [String] -> IO()
