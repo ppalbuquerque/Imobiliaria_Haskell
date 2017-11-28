@@ -30,6 +30,13 @@ listando = do
     let ordena = Utils.ordenaTuplas_pessoas pessoas
     putStrLn . unlines . map Helpers.printPessoas $ pessoas
 
+buscar_pessoa :: String -> IO [String]
+buscar_pessoa cpf = do
+  f <- readFile "DataBase/Pessoas/pessoas.txt"
+  let fim = lines f
+  let pessoa = busca_pessoa fim cpf True
+  return pessoa
+
 listar :: [String] -> [(String, String, String)]
 listar [] = []
 listar (x:xs) =  [(busca_cpfs(words x), busca_nomes (words x), busca_idades (words x))] ++ listar xs
@@ -51,3 +58,14 @@ busca_idades [] = []
 busca_idades (x:xs) = if x == "idade:" then head xs else busca_idades xs
 
 -- Sessão Responsavel para fazer as buscas especificas da pessoa
+
+busca_pessoa :: [String] -> String -> Bool -> [String]
+busca_pessoa [] _ _ = [""]
+busca_pessoa (x : xs) pessoa_cpf flag = if (busca_pessoaCpf (words x) pessoa_cpf) == flag then [x] ++ busca_pessoa xs pessoa_cpf flag else busca_pessoa xs pessoa_cpf flag
+
+busca_pessoaCpf :: [String] -> String -> Bool
+busca_pessoaCpf [] _ = False
+busca_pessoaCpf (x : xs) pessoa_cpf = if x == "cpf:" then (check_id (head xs) pessoa_cpf) else busca_pessoaCpf xs pessoa_cpf
+
+check_id :: String -> String -> Bool
+check_id cpf_txt pessoa_cpf = if cpf_txt == pessoa_cpf then True else False

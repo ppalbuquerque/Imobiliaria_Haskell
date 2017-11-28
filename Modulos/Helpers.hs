@@ -63,7 +63,6 @@ saveListToFile path (x : xs)  = do
 destroyFile :: String -> IO()
 destroyFile path = removeFile path
 
-
 printImoveis :: (String, String) -> String
 printImoveis (codigo, endereco) = "Codigo: " ++ codigo ++ " Endereco: " ++ endereco
 
