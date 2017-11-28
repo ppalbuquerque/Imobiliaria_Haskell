@@ -1,6 +1,5 @@
 module Modulos.Helpers where
 
-import Modulos.Banco as Banco
 import Modulos.BancoDeDados as BancoDeDados
 import Modulos.Imovel as Imovel
 

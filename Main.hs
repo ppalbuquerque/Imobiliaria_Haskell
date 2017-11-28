@@ -23,6 +23,7 @@ main = do
       pRelato <- Menus.menu_relatorios
       case pRelato of
         1 -> Relatorios.relatorio_vendas
+        2 -> Relatorios.relatorio_alugueis
       main
     5 -> do
       pTipo <- Menus.menu_listando

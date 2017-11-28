@@ -65,11 +65,24 @@ buscar_imovel cod tipo = do
   let imovel = busca_imovel fim cod True
   return imovel
 
+buscar_imovel_indisponiveis :: String -> String -> IO [String]
+buscar_imovel_indisponiveis cod tipo = do
+  f <- readFile ("DataBase/" ++ tipo ++ "/imoveis_vendidos.txt")
+  let fim = lines f
+  let imovel = busca_imovel fim cod True
+  return imovel
+
 buscar_imoveis_except :: String -> String -> IO [String]
 buscar_imoveis_except cod tipo = do
   f <- readFile ("DataBase/" ++ tipo ++ "/imoveis_disponiveis.txt")
   let fim = lines f
   let imoveis = busca_imovel fim cod False
+  return imoveis
+
+buscar_imoveis_vendidos :: String -> IO [String]
+buscar_imoveis_vendidos tipo = do
+  f <- readFile ("DataBase/" ++ tipo ++  "/imoveis_vendidos.txt")
+  let imoveis = lines f
   return imoveis
 
 busca_imovel :: [String] -> String -> Bool -> [String]
