@@ -5,6 +5,7 @@ import Modulos.ListarContas
 import Modulos.Arvore
 import Modulos.Helpers as Helpers
 import Modulos.Menus as Menus
+import Modulos.Imovel_Controller as Imovel_Controller
 
 main = do
   Modulos.BancoDeDados.criar
@@ -26,8 +27,8 @@ main = do
     5 -> do
       pTipo <- Menus.menu_listando
       case pTipo of
-        1 -> Modulos.Arvore.listando "Vendas"
-        2 -> Modulos.Arvore.listando "Alugueis"
+        1 -> Imovel_Controller.listando "Vendas"
+        2 -> Imovel_Controller.listando "Alugueis"
       main
     6 -> do
       Modulos.Deposito.juros

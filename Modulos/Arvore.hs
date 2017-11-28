@@ -14,41 +14,9 @@ verifica conta = do
   if b == False then putStr $ error "Error!! Conta nao existe" else putStr "Conta aberta!!"
   print $ ""
 
-listando :: String -> IO()
-listando tipo = do
-  f <- readFile ("DataBase/" ++ tipo ++ "/imoveis_disponiveis.txt")
-  let fim = lines f
-  let imoveis = listar fim
-  let ordena = ordenaTuplas imoveis
-  putStrLn . unlines . map printImoveis $ imoveis
-
-
-ordenaTuplas :: [(String, String)] -> [(String, String)]
-ordenaTuplas [] = []
-ordenaTuplas (h : t) = ordenaTuplas menores ++ [h] ++ ordenaTuplas maiores
-  where menores = [ x | x <- t, x <= h ]
-        maiores = [ x | x <- t, x > h ]
-
-
 criar_lista :: [String] -> [String]
 criar_lista [] = []
 criar_lista (x:xs) = busca_contas1 (words x) ++ criar_lista xs
-
-listar :: [String] -> [(String, String)]
-listar [] = []
-listar (x:xs) =  [(busca_id(words x),busca_endereco (words x))] ++ listar xs
-
-busca_id :: [String] -> String
-busca_id [] = ""
-busca_id (x:xs) = if x == "imovelid:" then head xs else busca_id xs
-
-busca_endereco :: [String] -> String
-busca_endereco [] = ""
-busca_endereco (x:xs) = if x == "endereco:" then busca_endereco_found xs else busca_endereco xs
-
-busca_endereco_found :: [String] -> String
-busca_endereco_found [] = ""
-busca_endereco_found (x:xs) = if x == "," then "" else x ++ " " ++ busca_endereco_found xs
 
 busca_contas1 :: [String] -> [String]
 busca_contas1 [] = []

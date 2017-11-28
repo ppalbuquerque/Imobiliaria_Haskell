@@ -6,6 +6,7 @@ import Modulos.Venda as Venda
 import Modulos.Menus as Menus
 import Modulos.Pessoas_Controller as Pessoas_Controller
 import Modulos.Alugar as Alugar
+import Modulos.Imovel_Controller as Imovel_Controller
 
 import Data.Typeable
 
@@ -24,7 +25,7 @@ criarImovel = do
   putStr "Imovel criada!!"
 
 vendaImovel = do
-    Arvore.listando "Vendas"
+    Imovel_Controller.listando "Vendas"
     Venda.vender
 
 alugarImovel = do
