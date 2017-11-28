@@ -13,10 +13,7 @@ import Data.Typeable
 criarImovel :: IO()
 vendaImovel :: IO()
 alugarImovel :: IO()
---saldo :: IO()
---sacar :: IO()
---transferir :: IO()
---depositar :: IO()
+
 
 
 criarImovel = do

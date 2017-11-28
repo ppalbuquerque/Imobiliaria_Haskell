@@ -6,4 +6,4 @@ import Modulos.Pessoa as Pessoa
 
 data Aluguel = Aluguel { imovel :: Imovel
                        , locatario :: Pessoa
-                       , data :: String} deriving (Show)
+                       , dataV :: String} deriving (Show)
