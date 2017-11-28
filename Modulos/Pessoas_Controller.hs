@@ -5,9 +5,13 @@ import Modulos.Pessoa as Pessoa
 import Modulos.Utils as Utils
 import Modulos.Helpers as Helpers
 
-getInt ::IO Int
 
-getInt = readLn
+-- Instanciando a partir de string
+instanciar_pessoa :: String -> Pessoa
+instanciar_pessoa attr = Pessoa { nomePessoa = busca_nomes(words attr), cpf = busca_cpfs(words attr), idade = (read (busca_idades(words attr)) :: Int) }
+
+
+-- Seção responsavel por inserir uma pessoa
 
 inserir_pessoa = do
   putStrLn "Nome Cliente: "

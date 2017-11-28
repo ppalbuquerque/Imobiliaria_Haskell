@@ -2,7 +2,12 @@ module Modulos.Imovel_Controller where
 
 import Modulos.Utils as Utils
 import Modulos.Helpers as Helpers
+import Modulos.Imovel as Imovel
 
+-- Instanciando a partir de string
+instanciar_imovel :: String -> Imovel
+instanciar_imovel attr = (Imovel { endereco = busca_endereco(words attr), preco = (read (busca_preco(words attr)) :: Float) , descricao = busca_descricao(words attr), area = (read (busca_area(words attr)) :: Float) , comodos = (read (busca_comodos(words attr)) :: Int), tipo = busca_tipo(words attr),
+     imovelid = (read (busca_id(words attr)) :: Int)})
 -- Seção referente a listagem de imoveis
 
 listando :: String -> IO()
@@ -17,6 +22,26 @@ listando tipo = do
 listar :: [String] -> [(String, String)]
 listar [] = []
 listar (x:xs) =  [(busca_id(words x),busca_endereco (words x))] ++ listar xs
+
+busca_preco :: [String] -> String
+busca_preco [] = ""
+busca_preco (x:xs) = if x == "preco:" then head xs else busca_preco xs
+
+busca_descricao :: [String] -> String
+busca_descricao [] = ""
+busca_descricao (x:xs) = if x == "descricao:" then head xs else busca_descricao xs
+
+busca_comodos :: [String] -> String
+busca_comodos [] = ""
+busca_comodos (x:xs) = if x == "comodos:" then head xs else busca_comodos xs
+
+busca_area :: [String] -> String
+busca_area [] = ""
+busca_area (x:xs) = if x == "area:" then head xs else busca_area xs
+
+busca_tipo :: [String] -> String
+busca_tipo [] = ""
+busca_tipo (x:xs) = if x == "tipo:" then head xs else busca_tipo xs
 
 busca_id :: [String] -> String
 busca_id [] = ""

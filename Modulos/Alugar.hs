@@ -3,6 +3,8 @@ module Modulos.Alugar where
 import Modulos.Pessoas_Controller as Pessoas_Controller
 import Modulos.Imovel_Controller as Imovel_Controller
 import Modulos.Utils as Utils
+import Modulos.Imovel as Imovel
+import Modulos.Helpers as Helpers
 
 alugar :: String -> IO()
 alugar cpf = if cpf == "" then alugar_cliente_existente else alugar_novo_cliente
@@ -24,5 +26,7 @@ alugar_cliente_existente = do
   pCod <- getInt
   imovel <- Imovel_Controller.buscar_imovel (show pCod) "Alugueis"
   let imovel_value = Utils.extract_string imovel
-  print $ imovel_value
+  let imovel_instance = Imovel_Controller.instanciar_imovel imovel_value
+  let pessoa_instance = Pessoas_Controller.instanciar_pessoa pessoa_value
+  print $ endereco imovel_instance
   return ()
