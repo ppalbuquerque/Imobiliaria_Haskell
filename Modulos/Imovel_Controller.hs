@@ -16,28 +16,25 @@ listando tipo = do
   let fim = lines f
   let imoveis = listar fim
   let ordena = Utils.ordenaTuplas_imoveis imoveis
-  putStrLn . unlines . map printImoveis $ imoveis
+  putStrLn . unlines . map printImoveis $ ordena
 
-buscar_imoveis_vendidos_ord :: String -> Int -> IO [(String, String, String, String, String)]
-buscar_imoveis_vendidos_ord tipo ord = do
-  f <- readFile ("DataBase/" ++ tipo ++  "/imoveis_vendidos.txt")
+listar_imoveis_disponiveis_ord :: String -> Int -> IO ()
+listar_imoveis_disponiveis_ord tipo ord = do
+  f <- readFile ("DataBase/" ++ tipo ++  "/imoveis_disponiveis.txt")
   let imoveis = lines f
   case ord of
     1 -> do
       let imoveis_ord = listar_endere imoveis
       let ordena = Utils.ordenaTuplas_5 imoveis_ord
-      putStrLn "Ordenando por endereço"
-      return ordena
+      putStrLn . unlines . map printImoveis_detalhado_1 $ ordena
     2 -> do
       let imoveis_ord = listar_preco imoveis
       let ordena = Utils.ordenaTuplas_5 imoveis_ord
-      putStrLn "Ordenando por preço"
-      return ordena
+      putStrLn . unlines . map printImoveis_detalhado_2 $ ordena
     3 -> do
       let imoveis_ord = listar_cod imoveis
       let ordena = Utils.ordenaTuplas_5 imoveis_ord
-      putStrLn "Ordenando por código"
-      return ordena
+      putStrLn . unlines . map printImoveis_detalhado_3 $ ordena
 
 
 

@@ -27,9 +27,10 @@ main = do
       main
     5 -> do
       pTipo <- Menus.menu_listando
+      pOrd <- Menus.menu_ordenacao_vendas
       case pTipo of
-        1 -> Imovel_Controller.listando "Vendas"
-        2 -> Imovel_Controller.listando "Alugueis"
+        1 -> Imovel_Controller.listar_imoveis_disponiveis_ord "Vendas" pOrd
+        2 -> Imovel_Controller.listar_imoveis_disponiveis_ord "Alugueis" pOrd
       main
     6 -> return()
     7 -> return()

@@ -69,5 +69,14 @@ destroyFile path = do
 printImoveis :: (String, String) -> String
 printImoveis (codigo, endereco) = "Codigo: " ++ codigo ++ " Endereco: " ++ endereco
 
+printImoveis_detalhado_1 :: (String, String, String, String, String) -> String
+printImoveis_detalhado_1 (endereco, preco, descricao, comodos, codigo ) = "Endereço: " ++ endereco ++ " Preço: " ++ preco ++ " Descrição: " ++ descricao ++ " Comodos: " ++ comodos ++ " Código: " ++ codigo
+
+printImoveis_detalhado_2 :: (String, String, String, String, String) -> String
+printImoveis_detalhado_2 (preco, endereco, descricao, comodos, codigo ) = "Preço: " ++ preco ++ " Endereço: " ++ endereco ++ " Descrição: " ++ descricao ++ " Comodos: " ++ comodos ++ " Código: " ++ codigo
+
+printImoveis_detalhado_3 :: (String, String, String, String, String) -> String
+printImoveis_detalhado_3 (codigo, preco, descricao, comodos, endereco ) = "Código: " ++ codigo ++ " Preço: " ++ preco ++ " Descrição: " ++ descricao ++ " Comodos: " ++ comodos ++ " Endereço: " ++ endereco
+
 printPessoas :: (String, String, String) -> String
 printPessoas (cpf, nome, idade) = "CPF: " ++ cpf ++ " Nome: " ++ nome ++ " Idade: " ++ idade

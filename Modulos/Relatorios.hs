@@ -15,14 +15,13 @@ import Modulos.Menus as Menus
 -- Seção relatorio Vendas
 
 relatorio_vendas = do
-  ord <- Menus.menu_ordenacao_vendas
   agora <- getCurrentTime
   let (ano, mes, dia) = toGregorian $ utctDay agora
   let data_string = Utils.date_to_string (ano, mes, dia)
   let arquivo = ("DataBase/Relatorios/Relatorio_Vendas" ++ data_string)
   writeFile arquivo ""
   appendFile arquivo preparar_cabecalho_vendas
-  colocar_elementos_vendas arquivo ord
+  colocar_elementos_vendas arquivo 1
   appendFile arquivo preparar_fim_vendas
   imoveis_vendidos <-Imovel_Controller.buscar_imoveis_vendidos "Vendas"
   appendFile arquivo (show(somar_total_vendas imoveis_vendidos))
