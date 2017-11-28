@@ -4,6 +4,7 @@ import Modulos.Arvore
 import Modulos.Helpers as Helpers
 import Modulos.Menus as Menus
 import Modulos.Imovel_Controller as Imovel_Controller
+import Modulos.Relatorios as Relatorios
 
 main = do
   Modulos.BancoDeDados.criar
@@ -19,6 +20,9 @@ main = do
       Modulos.Operacoes.alugarImovel
       main
     4 -> do
+      pRelato <- Menus.menu_relatorios
+      case pRelato of
+        1 -> Relatorios.relatorio_vendas
       main
     5 -> do
       pTipo <- Menus.menu_listando

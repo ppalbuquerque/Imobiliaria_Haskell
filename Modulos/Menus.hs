@@ -37,6 +37,17 @@ menu_alugar_cliente = do
   pTipo <- readLn
   if pTipo <= 0 || pTipo > 2 then do
     putStrLn "Opção inválida"
-    menu_listando
+    menu_alugar_cliente
   else
     return pTipo
+
+menu_relatorios :: IO Int
+menu_relatorios = do
+  putStrLn "1 - Relatório De Vendas"
+  putStrLn "2 - Relatório De Alugueis"
+  pTipo <- readLn
+  if pTipo <= 0 || pTipo > 2 then do
+    putStrLn "Opção inválida"
+    menu_relatorios
+  else
+    return pTipo  
