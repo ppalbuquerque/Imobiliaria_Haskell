@@ -66,3 +66,6 @@ destroyFile path = removeFile path
 
 printImoveis :: (String, String) -> String
 printImoveis (codigo, endereco) = "Codigo: " ++ codigo ++ " Endereco: " ++ endereco
+
+printPessoas :: (String, String, String) -> String
+printPessoas (cpf, nome, idade) = "CPF: " ++ cpf ++ " Nome: " ++ nome ++ " Idade: " ++ idade

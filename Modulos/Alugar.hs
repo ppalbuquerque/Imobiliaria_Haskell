@@ -1,5 +1,8 @@
 module Modulos.Alugar where
 
+import Modulos.Pessoas_Controller as Pessoas_Controller
+
+
 alugar :: String -> IO()
 alugar cpf = if cpf == "" then alugar_cliente_existente else alugar_novo_cliente
 
@@ -10,5 +13,7 @@ alugar_novo_cliente = do
 
 
 alugar_cliente_existente = do
-  putStrLn " Digite o CPF: "
+  Pessoas_Controller.listando
+  putStrLn "Digite o CPF: "
+  pCPF <- getInt
   return ()

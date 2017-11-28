@@ -42,10 +42,6 @@ busca_id :: [String] -> String
 busca_id [] = ""
 busca_id (x:xs) = if x == "imovelid:" then head xs else busca_id xs
 
-busca_idade :: [String] -> [String]
-busca_idade [] = []
-busca_idade (x:xs) = if x == "idade:" then [head xs] else busca_idade xs
-
 busca_endereco :: [String] -> String
 busca_endereco [] = ""
 busca_endereco (x:xs) = if x == "endereco:" then busca_endereco_found xs else busca_endereco xs
