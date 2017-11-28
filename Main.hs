@@ -31,6 +31,5 @@ main = do
         1 -> Imovel_Controller.listando "Vendas"
         2 -> Imovel_Controller.listando "Alugueis"
       main
-    6 -> do
-      main
+    6 -> return()
     7 -> return()

@@ -7,11 +7,11 @@ menu_principal = do
   putStrLn "3 - Alugar Imovel"
   putStrLn "4 - Relatórios"
   putStrLn "5 - Listar Imoveis"
-  putStrLn "7 - Sair"
+  putStrLn "6 - Sair"
   putStrLn ""
   putStrLn "Escolha >> "
   opcao <- readLn
-  if opcao <= 0 || opcao > 7 then do
+  if opcao <= 0 || opcao > 6 then do
     putStrLn "Opção inválida"
     menu_principal
   else
@@ -50,4 +50,4 @@ menu_relatorios = do
     putStrLn "Opção inválida"
     menu_relatorios
   else
-    return pTipo  
+    return pTipo

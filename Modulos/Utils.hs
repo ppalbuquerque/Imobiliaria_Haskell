@@ -14,6 +14,7 @@ ordenaTuplas_imoveis (h : t) = ordenaTuplas_imoveis menores ++ [h] ++ ordenaTupl
         maiores = [ x | x <- t, x > h ]
 
 extract_string :: [String] -> String
+extract_string [] = "Vazio"
 extract_string (x : xs) = x
 
 date_to_string :: (Integer, Int, Int) -> String

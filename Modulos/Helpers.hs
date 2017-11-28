@@ -56,7 +56,8 @@ dadosImovel = do
 saveListToFile :: String -> [String] -> IO()
 saveListToFile _ [] = putStrLn "Banco de dados atualizados"
 saveListToFile path (x : xs)  = do
-   appendFile path (x ++ "\n")
+   empty <- isFileEmpty path
+   if empty then appendFile path (x) else appendFile path ("\n" ++ x)
    saveListToFile path xs
 
 destroyFile :: String -> IO()
