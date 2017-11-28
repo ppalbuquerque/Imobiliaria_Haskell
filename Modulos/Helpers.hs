@@ -5,6 +5,7 @@ import Modulos.Imovel as Imovel
 
 import System.Random
 import System.Directory
+-- import Control.Monad
 
 getInt :: IO Int
 getFloat :: IO Float
@@ -26,8 +27,8 @@ seletorTipos = do
     seletorTipos
   else
     case opcao of
-      1 -> return ("Aluguel")
-      2 -> return ("Venda")
+      1 -> return ("Alugueis")
+      2 -> return ("Vendas")
 
 gerarid = do
    gen <- newStdGen
@@ -50,7 +51,7 @@ dadosImovel = do
   pId <- gerarid
 
   let dado = (Imovel {endereco=pEndereco, preco=pPreco, descricao=pDesc, area=pArea, comodos=pComodos, tipo = pTipos,imovelid = pId})
-  BancoDeDados.salvar_imovel dado
+  BancoDeDados.salvar_imovel pTipos dado
 
 
 saveListToFile :: String -> [String] -> IO()
@@ -61,7 +62,9 @@ saveListToFile path (x : xs)  = do
    saveListToFile path xs
 
 destroyFile :: String -> IO()
-destroyFile path = removeFile path
+destroyFile path = do
+   removeFile path
+   writeFile path ""
 
 printImoveis :: (String, String) -> String
 printImoveis (codigo, endereco) = "Codigo: " ++ codigo ++ " Endereco: " ++ endereco

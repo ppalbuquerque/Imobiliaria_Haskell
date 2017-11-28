@@ -9,19 +9,20 @@ import Modulos.Aluguel_Controller as Aluguel_Controller
 import Modulos.Pessoa as Pessoa
 import Modulos.Pessoas_Controller as Pessoas_Controller
 import Modulos.Imovel as Imovel
-
+import Modulos.Menus as Menus
 
 
 -- Seção relatorio Vendas
 
 relatorio_vendas = do
+  ord <- Menus.menu_ordenacao_vendas
   agora <- getCurrentTime
   let (ano, mes, dia) = toGregorian $ utctDay agora
   let data_string = Utils.date_to_string (ano, mes, dia)
   let arquivo = ("DataBase/Relatorios/Relatorio_Vendas" ++ data_string)
   writeFile arquivo ""
   appendFile arquivo preparar_cabecalho_vendas
-  colocar_elementos_vendas arquivo
+  colocar_elementos_vendas arquivo ord
   appendFile arquivo preparar_fim_vendas
   imoveis_vendidos <-Imovel_Controller.buscar_imoveis_vendidos "Vendas"
   appendFile arquivo (show(somar_total_vendas imoveis_vendidos))
@@ -29,8 +30,8 @@ relatorio_vendas = do
 preparar_cabecalho_vendas :: String
 preparar_cabecalho_vendas = "-------------------------------- Relatório De Vendas -----------------------------\n | Endereço |  ---  | Preço |  ---  | Descrição |  ---  | Comodos |  ---  | Código | \n\n"
 
-colocar_elementos_vendas :: String -> IO ()
-colocar_elementos_vendas path = do
+colocar_elementos_vendas :: String -> Int -> IO ()
+colocar_elementos_vendas path ord = do
   imoveis_vendidos <- Imovel_Controller.buscar_imoveis_vendidos "Vendas"
   colocar_elementos_vendas_aux path imoveis_vendidos
 

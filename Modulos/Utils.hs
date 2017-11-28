@@ -13,6 +13,13 @@ ordenaTuplas_imoveis (h : t) = ordenaTuplas_imoveis menores ++ [h] ++ ordenaTupl
   where menores = [ x | x <- t, x <= h ]
         maiores = [ x | x <- t, x > h ]
 
+
+ordenaTuplas_5 :: [(String, String, String, String, String)] -> [(String, String, String, String, String)]
+ordenaTuplas_5 [] = []
+ordenaTuplas_5 (h : t) = ordenaTuplas_5 menores ++ [h] ++ ordenaTuplas_5 maiores
+  where menores = [ x | x <- t, x <= h ]
+        maiores = [ x | x <- t, x > h ]
+
 extract_string :: [String] -> String
 extract_string [] = "Vazio"
 extract_string (x : xs) = x

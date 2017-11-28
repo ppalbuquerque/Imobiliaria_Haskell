@@ -18,6 +18,40 @@ listando tipo = do
   let ordena = Utils.ordenaTuplas_imoveis imoveis
   putStrLn . unlines . map printImoveis $ imoveis
 
+buscar_imoveis_vendidos_ord :: String -> Int -> IO [(String, String, String, String, String)]
+buscar_imoveis_vendidos_ord tipo ord = do
+  f <- readFile ("DataBase/" ++ tipo ++  "/imoveis_vendidos.txt")
+  let imoveis = lines f
+  case ord of
+    1 -> do
+      let imoveis_ord = listar_endere imoveis
+      let ordena = Utils.ordenaTuplas_5 imoveis_ord
+      putStrLn "Ordenando por endereço"
+      return ordena
+    2 -> do
+      let imoveis_ord = listar_preco imoveis
+      let ordena = Utils.ordenaTuplas_5 imoveis_ord
+      putStrLn "Ordenando por preço"
+      return ordena
+    3 -> do
+      let imoveis_ord = listar_cod imoveis
+      let ordena = Utils.ordenaTuplas_5 imoveis_ord
+      putStrLn "Ordenando por código"
+      return ordena
+
+
+
+listar_endere :: [String] -> [(String, String, String, String, String)]
+listar_endere [] = []
+listar_endere (x:xs) =  [(busca_endereco(words x),busca_preco (words x),busca_descricao(words x),busca_comodos(words x), busca_id(words x))] ++ listar_endere xs
+
+listar_preco :: [String] -> [(String, String, String, String, String)]
+listar_preco [] = []
+listar_preco (x:xs) =  [(busca_preco(words x),busca_endereco (words x),busca_descricao(words x),busca_comodos(words x), busca_id(words x))] ++ listar_preco xs
+
+listar_cod :: [String] -> [(String, String, String, String, String)]
+listar_cod [] = []
+listar_cod (x:xs) =  [(busca_id(words x),busca_preco (words x),busca_descricao(words x),busca_comodos(words x), busca_endereco(words x))] ++ listar_cod xs
 
 listar :: [String] -> [(String, String)]
 listar [] = []

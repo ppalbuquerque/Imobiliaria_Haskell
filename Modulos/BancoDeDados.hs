@@ -14,7 +14,7 @@ geraFormato_imovel :: Imovel -> String
 -- Gera formato para ser salvo no arquivo de pessoas.txt
 geraFormato_pessoa :: Pessoa -> String
 -- Salva imoveis utilizando appendFile no arquivo de imoveis_disponiveis.txt
-salvar_imovel :: Imovel -> IO()
+salvar_imovel :: String -> Imovel -> IO()
 -- Salva pessoas utilizando appendFile no arquivo de pessoas.txt
 salvar_pessoa :: Pessoa -> IO()
 -- Busca uma pessoa no banco de dados
@@ -27,8 +27,10 @@ criar = do
     when (not existeImoveis) (writeFile arquivoImoveis "")
 
 
-salvar_imovel p = do
-  appendFile "DataBase/imoveis.txt" (geraFormato_imovel p ++ "\n")
+salvar_imovel tipo p = do
+  let arquivo = ("DataBase/" ++ tipo ++ "/imoveis_disponiveis.txt")
+  empty <- isFileEmpty arquivo
+  if empty then appendFile arquivo (geraFormato_imovel p) else appendFile arquivo ("\n" ++ geraFormato_imovel p)
   putStr "Banco de dados atualizado!\n"
 
 salvar_pessoa p = do

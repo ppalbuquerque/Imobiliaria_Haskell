@@ -7,6 +7,8 @@ import Modulos.Imovel as Imovel
 import Modulos.Helpers as Helpers
 import Modulos.Aluguel as Aluguel
 import Modulos.BancoDeDados as BancoDeDados
+import Modulos.Arvore as Arvore
+import Control.Monad
 
 alugar :: String -> IO()
 alugar cpf = if cpf == "" then alugar_cliente_existente else alugar_novo_cliente cpf
@@ -25,6 +27,8 @@ alugar_novo_cliente pCPF = do
   Imovel_Controller.listando "Alugueis"
   putStrLn "Digite o codigo do imovel: "
   pCod <- getInt
+  existe <- Arvore.verifica_imovel_cod (show pCod) "Alugueis"
+  when (not existe) (return ())
   imovel <- Imovel_Controller.buscar_imovel (show pCod) "Alugueis"
   let imovel_value = Utils.extract_string imovel
   let imovel_instance = Imovel_Controller.instanciar_imovel imovel_value

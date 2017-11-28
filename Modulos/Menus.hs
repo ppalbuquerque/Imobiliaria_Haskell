@@ -51,3 +51,15 @@ menu_relatorios = do
     menu_relatorios
   else
     return pTipo
+
+menu_ordenacao_vendas :: IO Int
+menu_ordenacao_vendas = do
+  putStrLn "1 - Endereço"
+  putStrLn "2 - Preço"
+  putStrLn "3 - Código"
+  pEscolha <- readLn
+  if pEscolha <= 0 || pEscolha > 3 then do
+    putStrLn "Opção inválida"
+    menu_ordenacao_vendas
+  else
+    return pEscolha

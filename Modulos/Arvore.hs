@@ -1,26 +1,24 @@
 module Modulos.Arvore where
 import Data.List
 import Modulos.Helpers as Helpers
-import Data.Typeable
 
-verifica :: String -> IO()
-verifica conta = do
-  f <- readFile "/Users/luishenriquesilva/Desktop/hell_bank-master/DataBase/contas.txt"
+verifica_imovel_cod :: String -> String -> IO Bool
+verifica_imovel_cod pCod tipo = do
+  f <- readFile ("DataBase/" ++ tipo ++ "/imoveis_disponiveis.txt")
   let fim = lines f
-  --let q = words fim
-  let seq = criar_lista fim
+  let seq = criar_lista_imovel_cod fim
   let arv = fazABB seq
-  let b = buscar conta arv
-  if b == False then putStr $ error "Error!! Conta nao existe" else putStr "Conta aberta!!"
-  print $ ""
+  let b = buscar pCod arv
+  if b == False then putStr $ error "Error!! imovel não existe" else putStr ""
+  return (b)
 
-criar_lista :: [String] -> [String]
-criar_lista [] = []
-criar_lista (x:xs) = busca_contas1 (words x) ++ criar_lista xs
+criar_lista_imovel_cod :: [String] -> [String]
+criar_lista_imovel_cod [] = []
+criar_lista_imovel_cod (x:xs) = busca_imovel_cod (words x) ++ criar_lista_imovel_cod xs
 
-busca_contas1 :: [String] -> [String]
-busca_contas1 [] = []
-busca_contas1 (x:xs) = if x == "numero:" then [head xs] else busca_contas1 xs
+busca_imovel_cod :: [String] -> [String]
+busca_imovel_cod [] = []
+busca_imovel_cod (x:xs) = if x == "imovelid:" then [head xs] else busca_imovel_cod xs
 
 data Arvore t = Nulo | No (Arvore t) t (Arvore t)
                        deriving (Eq, Ord, Show)

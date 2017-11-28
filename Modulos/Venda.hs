@@ -6,7 +6,7 @@ import Control.Monad
 import System.Directory
 import System.Environment
 import System.IO.Error
-import Modulos.Arvore
+import Modulos.Arvore as Arvore
 import Modulos.Helpers as Helpers
 import Modulos.Imovel_Controller as Imovel_Controller
 
@@ -14,6 +14,8 @@ import Modulos.Imovel_Controller as Imovel_Controller
 vender = do
   putStrLn $ "Escolha um imovel: "
   pCod <- getLine
+  existe <- Arvore.verifica_imovel_cod pCod "Vendas"
+  when (not existe) (return ())
   imovel_vendido <- Imovel_Controller.buscar_imovel pCod "Vendas"
   Helpers.saveListToFile "DataBase/Vendas/imoveis_vendidos.txt" imovel_vendido
   imoveis_disponiveis <- Imovel_Controller.buscar_imoveis_except pCod "Vendas"
