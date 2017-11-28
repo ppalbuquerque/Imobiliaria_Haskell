@@ -1,7 +1,5 @@
 import Modulos.BancoDeDados
 import Modulos.Operacoes
-import Modulos.Deposito
-import Modulos.ListarContas
 import Modulos.Arvore
 import Modulos.Helpers as Helpers
 import Modulos.Menus as Menus
@@ -21,8 +19,6 @@ main = do
       Modulos.Operacoes.alugarImovel
       main
     4 -> do
-      Modulos.Deposito.depositando
-      Modulos.Deposito.transfere
       main
     5 -> do
       pTipo <- Menus.menu_listando
@@ -31,7 +27,5 @@ main = do
         2 -> Imovel_Controller.listando "Alugueis"
       main
     6 -> do
-      Modulos.Deposito.juros
-      Modulos.Deposito.transfere
       main
     7 -> return()

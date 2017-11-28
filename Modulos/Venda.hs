@@ -14,7 +14,7 @@ import Modulos.Imovel_Controller as Imovel_Controller
 vender = do
   putStrLn $ "Escolha um imovel: "
   pCod <- getLine
-  imovel_vendido <- Imovel_Controller.buscar_imovel pCod "Vendas" --busca_imovel fim pCod True
+  imovel_vendido <- Imovel_Controller.buscar_imovel pCod "Vendas"
   Helpers.saveListToFile "DataBase/Vendas/imoveis_vendidos.txt" imovel_vendido
   imoveis_disponiveis <- Imovel_Controller.buscar_imoveis_except pCod "Vendas"
   Helpers.destroyFile "DataBase/Vendas/imoveis_disponiveis.txt"
