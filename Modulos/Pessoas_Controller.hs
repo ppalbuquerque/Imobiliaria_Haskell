@@ -34,6 +34,37 @@ listando = do
     let ordena = Utils.ordenaTuplas_pessoas pessoas
     putStrLn . unlines . map Helpers.printPessoas $ pessoas
 
+
+listar_pessoas_ord :: Int -> IO ()
+listar_pessoas_ord ord = do
+  f <- readFile ("DataBase/Pessoas/pessoas.txt")
+  let pessoas = lines f
+  case ord of
+    1 -> do
+      let pessoas_ord = listar_nome pessoas
+      let ordena = Utils.ordenaTuplas_pessoas pessoas_ord
+      putStrLn . unlines . map printPessoas_2 $ ordena
+    2 -> do
+      let pessoas_ord = listar_cpf pessoas
+      let ordena = Utils.ordenaTuplas_pessoas pessoas_ord
+      putStrLn . unlines . map printPessoas $ ordena
+    3 -> do
+      let pessoas_ord = listar_idade pessoas
+      let ordena = Utils.ordenaTuplas_pessoas pessoas_ord
+      putStrLn . unlines . map printPessoas_3 $ ordena
+
+listar_nome :: [String] -> [(String, String, String)]
+listar_nome [] = []
+listar_nome (x:xs) =  [(busca_nomes(words x),busca_cpfs (words x),busca_idades(words x))] ++ listar_nome xs
+
+listar_cpf :: [String] -> [(String, String, String)]
+listar_cpf [] = []
+listar_cpf (x:xs) =  [(busca_cpfs(words x),busca_nomes (words x),busca_idades(words x))] ++ listar_cpf xs
+
+listar_idade :: [String] -> [(String, String, String)]
+listar_idade [] = []
+listar_idade (x:xs) =  [(busca_idades(words x),busca_nomes (words x),busca_cpfs(words x))] ++ listar_idade xs
+
 buscar_pessoa :: String -> IO [String]
 buscar_pessoa cpf = do
   f <- readFile "DataBase/Pessoas/pessoas.txt"

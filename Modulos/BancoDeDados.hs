@@ -7,8 +7,6 @@ import Modulos.Pessoa as Pessoa
 import Modulos.Aluguel as Aluguel
 import Modulos.Utils as Utils
 
--- Cria o diretório DataBase e os arquivos
-criar :: IO()
 -- Gera formato para ser salvo no arquivo de imoveis_disponiveis.txt
 geraFormato_imovel :: Imovel -> String
 -- Gera formato para ser salvo no arquivo de pessoas.txt
@@ -19,12 +17,6 @@ salvar_imovel :: String -> Imovel -> IO()
 salvar_pessoa :: Pessoa -> IO()
 -- Busca uma pessoa no banco de dados
 
-criar = do
-    createDirectoryIfMissing True "DataBase"
-    let arquivoImoveis = "DataBase/imoveis.txt"
-
-    existeImoveis <- doesFileExist arquivoImoveis
-    when (not existeImoveis) (writeFile arquivoImoveis "")
 
 
 salvar_imovel tipo p = do

@@ -9,11 +9,12 @@ menu_principal = do
   putStrLn "5 - Listar Imoveis"
   putStrLn "6 - Listar Clientes"
   putStrLn "7 - Listar Alugueis"
-  putStrLn "8 - Sair"
+  putStrLn "8 - Cadastrar Cliente"
+  putStrLn "9 - Sair"
   putStrLn ""
   putStrLn "Escolha >> "
   opcao <- readLn
-  if opcao <= 0 || opcao > 8 then do
+  if opcao <= 0 || opcao > 9 then do
     putStrLn "Opção inválida"
     menu_principal
   else
@@ -63,5 +64,28 @@ menu_ordenacao_vendas = do
   if pEscolha <= 0 || pEscolha > 3 then do
     putStrLn "Opção inválida"
     menu_ordenacao_vendas
+  else
+    return pEscolha
+
+menu_ordenacao_clientes :: IO Int
+menu_ordenacao_clientes = do
+  putStrLn "1 - Nome"
+  putStrLn "2 - CPF"
+  putStrLn "3 - Idade"
+  pEscolha <- readLn
+  if pEscolha <= 0 || pEscolha > 3 then do
+    putStrLn "Opção inválida"
+    menu_ordenacao_clientes
+  else
+    return pEscolha
+
+menu_ordenacao_aluguel :: IO Int
+menu_ordenacao_aluguel = do
+  putStrLn "1 - Locatário"
+  putStrLn "2 - Imovel"
+  pEscolha <- readLn
+  if pEscolha <= 0 || pEscolha > 2 then do
+    putStrLn "Opção inválida"
+    menu_ordenacao_clientes
   else
     return pEscolha

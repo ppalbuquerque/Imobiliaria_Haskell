@@ -5,7 +5,7 @@ import Modulos.Imovel as Imovel
 
 import System.Random
 import System.Directory
--- import Control.Monad
+import Control.Monad
 
 getInt :: IO Int
 getFloat :: IO Float
@@ -15,6 +15,32 @@ gerarid :: IO Int
 
 getInt = readLn
 getFloat = readLn
+
+criar_arquivos = do
+    createDirectoryIfMissing True "DataBase"
+    createDirectoryIfMissing True "DataBase/Vendas/"
+    createDirectoryIfMissing True "DataBase/Relatorios/"
+    createDirectoryIfMissing True "DataBase/Alugueis/"
+    createDirectoryIfMissing True "DataBase/Pessoas/"
+    let arquivoImoveisVendasV = "DataBase/Vendas/imoveis_vendidos.txt"
+    let arquivoImoveisVendasD = "DataBase/Vendas/imoveis_disponiveis.txt"
+    let arquivoImoveisAlugueisV = "DataBase/Alugueis/imoveis_vendidos.txt"
+    let arquivoImoveisAlugueisD = "DataBase/Alugueis/imoveis_disponiveis.txt"
+    let arquivoImoveisAlugueisA = "DataBase/Alugueis/alugueis.txt"
+    let arquivoPessoas = "DataBase/Pessoas/pessoas.txt"
+
+    existe <- doesFileExist arquivoImoveisVendasV
+    when (not existe) (writeFile arquivoImoveisVendasV "")
+    existe <- doesFileExist arquivoImoveisVendasD
+    when (not existe) (writeFile arquivoImoveisVendasD "")
+    existe <- doesFileExist arquivoImoveisAlugueisD
+    when (not existe) (writeFile arquivoImoveisAlugueisD "")
+    existe <- doesFileExist arquivoImoveisAlugueisA
+    when (not existe) (writeFile arquivoImoveisAlugueisA "")
+    existe <- doesFileExist arquivoImoveisAlugueisV
+    when (not existe) (writeFile arquivoImoveisAlugueisV "")
+    existe <- doesFileExist arquivoPessoas
+    when (not existe) (writeFile arquivoPessoas "")
 
 seletorTipos = do
   putStrLn "Tipo:"
@@ -80,3 +106,15 @@ printImoveis_detalhado_3 (codigo, preco, descricao, comodos, endereco ) = "Códi
 
 printPessoas :: (String, String, String) -> String
 printPessoas (cpf, nome, idade) = "CPF: " ++ cpf ++ " Nome: " ++ nome ++ " Idade: " ++ idade
+
+printPessoas_2 :: (String, String, String) -> String
+printPessoas_2 (nome, cpf, idade) = "Nome: " ++ nome ++ " CPF: " ++ cpf ++ " Idade: " ++ idade
+
+printPessoas_3 :: (String, String, String) -> String
+printPessoas_3 (idade, nome, cpf) = "Idade: " ++ idade ++ " Nome: " ++ nome ++ " CPF: " ++ cpf
+
+printAluguel_1 :: (String, String, String) -> String
+printAluguel_1 (imovel_cod, pessoa_cod, dataV) = "Imovel: " ++ imovel_cod ++ "Locatário: " ++ pessoa_cod ++ "Data De Pagamento: " ++ dataV
+
+printAluguel_2 :: (String, String, String) -> String
+printAluguel_2 (pessoa_cod, imovel_cod, dataV) = "Locatário: " ++ pessoa_cod ++ "Imovel: " ++ imovel_cod ++ "Data De Pagamento: " ++ dataV
